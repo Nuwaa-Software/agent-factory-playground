@@ -31,3 +31,21 @@ def test_empty_input():
 def test_bad_header():
     with pytest.raises(ValueError):
         parse_csv("when,what,how much\n2026-01-01,x,1")
+
+
+def test_quoted_amount_with_thousands_separator():
+    csv_text = """date,category,amount,note
+2026-03-01,rent,"1,250.00",march rent
+"""
+    rows = parse_csv(csv_text)
+    assert len(rows) == 1
+    assert rows[0].amount == Decimal("1250.00")
+
+
+def test_quoted_note_with_comma():
+    csv_text = """date,category,amount,note
+2026-03-02,food,9.99,"lunch, with team"
+"""
+    rows = parse_csv(csv_text)
+    assert len(rows) == 1
+    assert rows[0].note == "lunch, with team"
