@@ -2,6 +2,6 @@
 
 from expenses.models import Expense
 from expenses.parser import parse_csv
-from expenses.report import category_totals, monthly_totals
+from expenses.report import category_totals, monthly_totals, top_categories
 
-__all__ = ["Expense", "parse_csv", "category_totals", "monthly_totals"]
+__all__ = ["Expense", "parse_csv", "category_totals", "monthly_totals", "top_categories"]
